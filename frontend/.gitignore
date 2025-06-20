@@ -10,7 +10,7 @@ node_modules
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
+*.DS_Store
 
 # Ignore large files
 *.mov
