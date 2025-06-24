@@ -15,15 +15,20 @@ export default function Home() {
 
   const questions = [
     { question: "What level of education do you want to pursue abroad?", options: ["Bachelor's", "Master's", "PhD", "Diploma", "Still deciding"] },
-    { question: "What's your preferred field of study?", options: ["Engineering/Tech", "Business/Management", "Health & Medicine", "Humanities/Arts", "Other"] },
+    { question: "What's your preferred field of study?", options: ["Engineering/Tech", "Business/Management", "Health & Medicine", "Humanities/Arts", "Research/Science", "Other"] },
     { question: "Do you have a preferred intake?", options: ["Fall", "Spring", "Not Decided Yet"] },
     { question: "What's your budget range (INR)?", options: ["<10 Lakhs", "10-20 Lakhs", "20+ Lakhs"] },
     { question: "What stage are you currently at in your academic journey?", options: ["12th grade", "Undergraduate", "Recently graduated", "Postgraduate", "Other"] },
-    { question: "Which stream/field are you currently studying or graduated from?", options: ["Engineering/Tech", "Commerce/Management", "Science", "Arts/Humanities", "Other"] },
-    { question: "What is currrent rate of academic performance so far?", options: ["Excellent (Above 80%)", "Good (65-80%)", "Average (50-65%)", "Below average"] },
-    { question: "Are you currently enrolled in any test preparation course?", options: ["IELTS", "TOEFL", "GRE/GMAT", "Some or All of the Above", "Not enrolled yet", "Not needed"] },
+    { question: "Which stream/field are you currently studying or graduated from?", options: ["Engineering/Tech", "Commerce/Management", "Science/Research", "Arts/Humanities", "Other"] },
+    { question: "What is your current rate of academic performance so far?", options: ["Excellent (Above 80%)", "Good (65-80%)", "Average (50-65%)", "Below average"] },
+    { question: "Are you currently enrolled in any test preparation course?", options: ["IELTS", "TOEFL", "GRE/GMAT", "French", "English", "Some or All of the Above", "Not enrolled yet", "Not needed"] },
     { question: "When are you planning to go abroad for study?", options: ["Within 6 months", "In a year", "1-2 years later", "No fixed timeline"] },
-    { question: "What's your primary motivation to study abroad?", options: ["Better education quality", "Global exposure", "Job opportunities", "PR & settlement", "Peer/Family influence"] },
+    { question: "What's your primary motivation to study abroad?", options: ["Better education quality", "Global exposure", "Job opportunities", "PR & settlement", "Peer/Family influence", "Research opportunities"] },
+    { question: "How important is research to your study plans?", options: ["Very important", "Somewhat important", "Not important"] },
+    { question: "What is your preferred language of instruction?", options: ["English", "French", "German", "Other"] },
+    { question: "How important is cultural diversity in your destination?", options: ["Very important", "Somewhat important", "Not important"] },
+    { question: "Do you prefer a Western or Asian cultural environment?", options: ["Western", "Asian", "No preference"] },
+    { question: "Are you interested in countries with strong public safety?", options: ["Yes", "Somewhat", "No preference"] },
   ];
 
   React.useEffect(() => {

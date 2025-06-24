@@ -67,15 +67,20 @@ function SummaryChart({
 
 const questions = [
     { question: "What level of education do you want to pursue abroad?", options: ["Bachelor's", "Master's", "PhD", "Diploma", "Still deciding"] },
-    { question: "What's your preferred field of study?", options: ["Engineering/Tech", "Business/Management", "Health & Medicine", "Humanities/Arts", "Other"] },
+    { question: "What's your preferred field of study?", options: ["Engineering/Tech", "Business/Management", "Health & Medicine", "Humanities/Arts", "Research/Science", "Other"] },
     { question: "Do you have a preferred intake?", options: ["Fall", "Spring", "Not Decided Yet"] },
     { question: "What's your budget range (INR)?", options: ["<10 Lakhs", "10-20 Lakhs", "20+ Lakhs"] },
     { question: "What stage are you currently at in your academic journey?", options: ["12th grade", "Undergraduate", "Recently graduated", "Postgraduate", "Other"] },
-    { question: "Which stream/field are you currently studying or graduated from?", options: ["Engineering/Tech", "Commerce/Management", "Science", "Arts/Humanities", "Other"] },
-    { question: "What is currrent rate of academic performance so far?", options: ["Excellent (Above 80%)", "Good (65-80%)", "Average (50-65%)", "Below average"] },
-    { question: "Are you currently enrolled in any test preparation course?", options: ["IELTS", "TOEFL", "GRE/GMAT", "Some or All of the Above", "Not enrolled yet", "Not needed"] },
+    { question: "Which stream/field are you currently studying or graduated from?", options: ["Engineering/Tech", "Commerce/Management", "Science/Research", "Arts/Humanities", "Other"] },
+    { question: "What is your current rate of academic performance so far?", options: ["Excellent (Above 80%)", "Good (65-80%)", "Average (50-65%)", "Below average"] },
+    { question: "Are you currently enrolled in any test preparation course?", options: ["IELTS", "TOEFL", "GRE/GMAT", "French", "English", "Some or All of the Above", "Not enrolled yet", "Not needed"] },
     { question: "When are you planning to go abroad for study?", options: ["Within 6 months", "In a year", "1-2 years later", "No fixed timeline"] },
-    { question: "What's your primary motivation to study abroad?", options: ["Better education quality", "Global exposure", "Job opportunities", "PR & settlement", "Peer/Family influence"] },
+    { question: "What's your primary motivation to study abroad?", options: ["Better education quality", "Global exposure", "Job opportunities", "PR & settlement", "Peer/Family influence", "Research opportunities"] },
+    { question: "How important is research to your study plans?", options: ["Very important", "Somewhat important", "Not important"] },
+    { question: "What is your preferred language of instruction?", options: ["English", "French", "German", "Other"] },
+    { question: "How important is cultural diversity in your destination?", options: ["Very important", "Somewhat important", "Not important"] },
+    { question: "Do you prefer a Western or Asian cultural environment?", options: ["Western", "Asian", "No preference"] },
+    { question: "Are you interested in countries with strong public safety?", options: ["Yes", "Somewhat", "No preference"] },
 ];
 
 function StartQuiz() {
@@ -84,7 +89,8 @@ function StartQuiz() {
     const [imageUrl, setImageUrl] = React.useState<string | null>(null);
     const [showSummary, setShowSummary] = React.useState(false);
 
-    // Restore quiz state from localStorage on component mount
+    // Remove the effect that always clears quiz state on mount
+    // Instead, restore from localStorage if available
     React.useEffect(() => {
         const savedState = localStorage.getItem('quizState');
         if (savedState) {
@@ -95,7 +101,7 @@ function StartQuiz() {
         }
     }, []);
 
-    // Save quiz state to localStorage whenever it changes
+    // Save quiz state to localStorage whenever it changes (optional, or remove if not needed)
     React.useEffect(() => {
         const quizState = { currentQuestionIndex, answers, showSummary };
         localStorage.setItem('quizState', JSON.stringify(quizState));
@@ -123,7 +129,7 @@ function StartQuiz() {
         setCurrentQuestionIndex(0);
         setAnswers({});
         setShowSummary(false);
-        localStorage.removeItem('quizState'); // Clear quiz state from localStorage
+        // Remove localStorage.removeItem('quizState'); // Do not clear quiz state here
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -169,7 +175,6 @@ function StartQuiz() {
                         <QuizSummary
                             questions={questions}
                             answers={answers}
-                            country={"your chosen country"}
                             onClose={handleRestart}
                             onGoBack={() => setShowSummary(false)}
                         />
@@ -216,6 +221,7 @@ function StartQuiz() {
                 </p>
                 <div className="mt-2 space-y-1 flex flex-col">
                     {questions[currentQuestionIndex].options.map((option, index) => {
+                        // Fix: Only mark as selected if answer matches exactly, and answers is not undefined
                         const isSelected = answers[currentQuestionIndex] === option;
                         return (
                             <Button

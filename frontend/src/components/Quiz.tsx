@@ -7,6 +7,7 @@ function Quiz() {
     const navigate = useNavigate();
 
     const handleStartQuiz = () => {
+        localStorage.removeItem('quizState'); // Clear quiz state before starting
         window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top before navigating
         navigate('/startquiz');
     };
@@ -23,7 +24,8 @@ function Quiz() {
                     </p>
                     <ul className="text-left text-gray-500 mb-7 list-disc list-inside">
                         <li>For Each Question You can choose only One Answer.</li>
-                        <li>Click "Next" to move to the next question.</li>
+                        <li>Click "Next" to move to the next question and "Previous" to move back to prior question.</li>
+                        <li>Once you Submit the Question you cannot edit it again.</li>
                         <li>Your score will be displayed after you finish the quiz.</li>
                         <li>Good luck and hope you find you dream country for admit!</li>
                     </ul>

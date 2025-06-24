@@ -41,26 +41,23 @@ const QuizPopup = ({ questions, onClose }: Props) => {
     const [answers, setAnswers] = React.useState<Record<number, string>>({});
     const [showLeadCapture, setShowLeadCapture] = React.useState(false);
     const [imageUrl, setImageUrl] = React.useState<string | null>(null);
-    const [country, setCountry] = React.useState<string | null>(null); // State to track selected country
     const [theme, setTheme] = React.useState<'dark' | 'light' | 'os'>('os'); // State to manage theme
     const [showSummary, setShowSummary] = React.useState(false);
     
-     // Restore quiz state from localStorage on component mount
-        React.useEffect(() => {
-            const savedState = localStorage.getItem('quizState');
-            if (savedState) {
-                const { currentQuestionIndex, answers, showSummary } = JSON.parse(savedState);
-                setCurrentQuestionIndex(currentQuestionIndex);
-                setAnswers(answers);
-                setShowSummary(showSummary);
-            }
-        }, []);
+    // Always clear quiz state on mount for a fresh start
+    React.useEffect(() => {
+        localStorage.removeItem('quizState');
+        setCurrentQuestionIndex(0);
+        setAnswers({});
+        setShowSummary(false);
+        setShowLeadCapture(false);
+    }, []);
     
-        // Save quiz state to localStorage whenever it changes
-        React.useEffect(() => {
-            const quizState = { currentQuestionIndex, answers, showSummary };
-            localStorage.setItem('quizState', JSON.stringify(quizState));
-        }, [currentQuestionIndex, answers, showSummary]);
+    // Save quiz state to localStorage whenever it changes (optional, or remove if not needed)
+    React.useEffect(() => {
+        const quizState = { currentQuestionIndex, answers, showSummary };
+        localStorage.setItem('quizState', JSON.stringify(quizState));
+    }, [currentQuestionIndex, answers, showSummary]);
     
     React.useEffect(() => {
         const fetchImage = async () => {
@@ -92,9 +89,6 @@ const QuizPopup = ({ questions, onClose }: Props) => {
 
     const handleAnswer = (answer: string) => {
         setAnswers({ ...answers, [currentQuestionIndex]: answer });
-        if (questions[currentQuestionIndex].question === "Which countries are you considering?") {
-            setCountry(answer); // Set the selected country
-        }
         handleNext();
     };
 
@@ -239,7 +233,6 @@ const QuizPopup = ({ questions, onClose }: Props) => {
                     <QuizSummary
                         questions={questions}
                         answers={answers}
-                        country={country}
                         onClose={onClose}
                         onGoBack={handleGoBack}
                     />
@@ -251,3 +244,4 @@ const QuizPopup = ({ questions, onClose }: Props) => {
 
 
 export default QuizPopup;
+
