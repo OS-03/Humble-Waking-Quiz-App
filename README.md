@@ -1,6 +1,6 @@
 # Humble-Walking Quiz App
 
-Humble-Walking Quiz Application Based on React-Frontend.
+Humble-Walking (Study Abroad Consultancy Firm) Quiz Application Based on React-Frontend with necessary data saved on excel-sheet.
 
 ## Features
 - Interactive quiz application.
