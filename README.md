@@ -1,6 +1,6 @@
 # Humble-Walking Quiz App
 
-Humble-Walking Quiz Application Based on MERN Stack.
+Humble-Walking Quiz Application Based on React-Frontend.
 
 ## Features
 - Interactive quiz application.
