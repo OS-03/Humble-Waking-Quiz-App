@@ -9,7 +9,6 @@ Humble-Walking (Study Abroad Consultancy Firm) Quiz Application Based on React-F
 
 ## Technologies Used
 - **Frontend**: React, Material-UI, Tailwind CSS, Vite.
-- **Backend**: Node.js, Express.js, MongoDB.
 - **State Management**: React Context API.
 - **Routing**: React Router DOM.
 - **Build Tool**: Vite.
